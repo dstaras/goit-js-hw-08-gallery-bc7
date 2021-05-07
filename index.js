@@ -25,16 +25,19 @@ const listImages = galleryItems
 
 refs.gallery.insertAdjacentHTML("beforeend", listImages);
 
+const setLightBtn = (src = "", alt = "") => {
+  refs.imageLightbox.src = src;
+  refs.imageLightbox.alt = alt;
+};
+
 refs.gallery.addEventListener("click", (event) => {
   event.preventDefault();
   if (event.target.tagName !== "IMG") return;
   refs.lightbox.classList.add("is-open");
-  refs.imageLightbox.src = event.target.dataset.source;
-  refs.imageLightbox.alt = event.target.alt;
+  setLightBtn(event.target.dataset.source, event.target.alt);
 });
 
 refs.closeLightboxBtn.addEventListener("click", (event) => {
   refs.lightbox.classList.remove("is-open");
-  refs.imageLightbox.src = "";
-  refs.imageLightbox.alt = "";
+  setLightBtn();
 });
